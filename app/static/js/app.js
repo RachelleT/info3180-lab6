@@ -36,11 +36,14 @@ const NewsList = Vue.component('news-list', {
 		</div>
 	</div>
 		<h2>News</h2>
-		<ul class="news__list">
-		<li v-for="article in articles" class="news__item"> {{ article.title }} 
-		<img :src="article.urlToImage">
-		 {{article.description}} </li>
-		</ul>
+		<div class="row">
+			<div class="col-4" v-for="article in articles">
+				<div class="card">
+				<h3 class="card-title"> {{ article.title }} </h3>
+				<img class="card-img-top" :src="article.urlToImage">
+				<p class="card-text"> {{article.description}} </p>
+			</div>
+		<div>
 	</div>
     		`,
     created: function() {
