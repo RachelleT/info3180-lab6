@@ -11,10 +11,10 @@ Vue.component('app-header', {
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <router-link to="/" class="nav-link">Home</router-link>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">News</a>
+                    <router-link to="/news" class="nav-link">News</router-link>
                   </li>
                 </ul>
               </div>
@@ -24,9 +24,10 @@ Vue.component('app-header', {
     data: function() {}
 });
 
-Vue.component('news-list', {
+const NewsList = Vue.component('news-list', {
     template: `
-    <div class="form-inline d-flex justify-content-center">
+      <div class="news">
+      <div class="form-inline d-flex justify-content-center">
 		<div class="form-group mx-sm-3 mb-2">
 			<label class="sr-only" for="search">Search</label>
 			<input type="search" name="search" v-model="searchTerm"
@@ -34,7 +35,6 @@ Vue.component('news-list', {
 			<button class="btn btn-primary mb-2" @click="searchNews">Search</button>
 		</div>
 	</div>
-      <div class="news">
 		<h2>News</h2>
 		<ul class="news__list">
 		<li v-for="article in articles" class="news__item"> {{ article.title }} 
@@ -86,11 +86,30 @@ Vue.component('app-footer', {
     }
 })
 
-
-let app = new Vue({
-    el: '#app',
-    data: {
-        welcome: 'Hello World! Welcome to VueJS'
-    }
+const Home = Vue.component('home', {
+	template: `
+		<div class="home">
+			<img src="/static/images/logo.png" alt="VueJS Logo">
+			<h1>{{ welcome }}</h1>
+		</div>
+	`,
+	data: function() {
+	return {
+		welcome: 'Hello World! Welcome to VueJS'
+		}
+	}
 });
+
+const router = new VueRouter({
+	mode: 'history',
+	routes: [
+	{ path: '/', component: Home },
+	{ path: '/news', component: NewsList }
+	]
+});
+
+const app = new Vue({
+	el: '#app',
+	router
+})
 
