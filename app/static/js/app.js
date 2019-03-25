@@ -21,7 +21,9 @@ Vue.component('app-header', {
             </nav>
         </header>    
     `,
-    data: function() {}
+    data: function() {
+    	return {}
+    }
 });
 
 const NewsList = Vue.component('news-list', {
@@ -42,8 +44,9 @@ const NewsList = Vue.component('news-list', {
 				<h3 class="card-title"> {{ article.title }} </h3>
 				<img class="card-img-top" :src="article.urlToImage">
 				<p class="card-text"> {{article.description}} </p>
+				</div>
 			</div>
-		<div>
+		</div>
 	</div>
     		`,
     created: function() {
